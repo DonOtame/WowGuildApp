@@ -1,0 +1,23 @@
+@if (charactersSummary().length == 1) {
+<div class="col-span-3 flex justify-center gap-1 mb-4">
+    <character-card [characterSummary]="charactersSummary()[0]"></character-card>
+</div>
+}
+
+
+@else {
+<div class="grid grid-cols-3 gap-1 mb-4">
+    @for (character of charactersSummary().slice(0, charactersSummary().length - (charactersSummary().length % 3));
+    track $index) {
+    <character-card [characterSummary]="character"></character-card>
+    }
+    @if (charactersSummary().length % 3 !== 0) {
+    <div class="col-span-3 flex justify-center gap-1">
+        @for (character of charactersSummary().slice(- (charactersSummary().length % 3)); track $index) {
+        <character-card [characterSummary]="character"></character-card>
+        }
+    </div>
+    }
+</div>
+
+}

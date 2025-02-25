@@ -1,0 +1,99 @@
+@if (character()) {
+<div class="text-white py-2 px-4 rounded-lg shadow-md flex items-center space-x-2">
+    <a routerLink="/members"
+        class="text-sm font-semibold text-yellow-400 hover:text-yellow-500">
+        {{ 'members' | translate }}
+    </a>
+
+    <svg class="w-4 h-4 text-yellow-400"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 12h14M12 5l7 7-7 7"></path>
+    </svg>
+
+    <span class="text-sm font-medium">{{ character()?.name }}</span>
+</div>
+
+<div class="max-w-7xl mx-auto p-6 text-white rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold text-center text-yellow-400 uppercase">
+        {{ character()?.name }}
+    </h1>
+
+    <div class="flex justify-center my-4">
+        <img [src]="character()?.thumbnail_url"
+            [alt]="character()?.name"
+            [ngStyle]="{ 'border-color': getClassColor() }"
+            class="border-4 rounded-lg shadow-lg w-48 h-48 object-cover" />
+    </div>
+
+    <div class="text-center space-y-1 grid grid-cols-1 sm:grid-cols-2 gap-0">
+        <p><strong>{{ 'faction' | translate }}:</strong> {{ character()?.faction | translate }}</p>
+        <p><strong>{{ 'race' | translate }}:</strong> {{ character()?.race | translate }}</p>
+        <p><strong>{{ 'class' | translate }}:</strong> {{ character()?.class | translate }}</p>
+        <p><strong>{{ 'role' | translate }}:</strong> {{ character()?.active_spec_role | translate }}</p>
+    </div>
+
+    <div class="flex flex-row justify-center text-center text-xl mt-2 pb-4 ">
+        <p class="mr-1">
+            IO: 
+        </p>
+        <h1 [style.color]="mythicPlusScores()?.segments?.all?.color">
+            {{ mythicPlusScores()?.segments?.all?.score }}
+        </h1>
+    </div>
+
+    <hr>
+
+    <h1 class="text-3xl font-bold text-center text-yellow-400 uppercase p-4">
+        {{ 'dungeons' | translate }}
+    </h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        @for (dungeon of mythicPlusBestRuns(); track $index) {
+        <div [ngClass]="{
+                'col-span-full flex justify-center w-fit m-auto': $index === 0, 
+                'border p-2 rounded-lg bg-cover bg-center': true
+              }"
+            [ngStyle]="{
+                'background-image': 'url(' + dungeon.background_image_url + ')',
+                'box-shadow': $index === 0 ? '0 0 0 4px rgba(255,223,0,0.8)' : '' 
+              }">
+            <div class="bg-black bg-opacity-50 rounded-lg p-4">
+                <h3 class="text-xl font-semibold text-yellow-400 text-center">
+                    {{ dungeon.short_name | translate }} {{dungeon.mythic_level}}
+                </h3>
+                <p class="text-lg text-white font-bold">
+                    {{ 'score' | translate }}: <span class="text-green-400">{{ dungeon.score }}</span>
+                </p>
+
+                <p class="mt-2 text-white">
+                    <strong>{{ 'clear_time' | translate }}:</strong>
+                    {{ dungeon.clear_time_ms | date: 'mm:ss' }}
+                </p>
+
+                <div class="mt-4">
+                    <p class="font-semibold text-lg text-white pb-1">{{ 'affixes' | translate }}:</p>
+                    <div class="flex flex-wrap gap-4">
+                        @for (affix of dungeon.affixes; track $index) {
+                        <div class="flex items-center space-x-2">
+                            @if (affix.icon_url) {
+                            <img [src]="affix.icon_url"
+                                [alt]="affix.name"
+                                class="w-8 h-8">
+                            }
+                            <span class="text-white">{{ affix.name | translate }}</span>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+}

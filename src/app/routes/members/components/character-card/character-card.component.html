@@ -1,0 +1,33 @@
+@if (character() != null || mythicPlusScores() != undefined){
+<a [routerLink]="[character()!.region, character()!.realm, character()!.name]"
+    class="block max-w-sm">
+    <div class="grid grid-cols-3 grid-rows-3 gap-0 border pl-1"
+        [ngStyle]="{ 'border-color': getClassColor() }">
+        <div class="flex row-span-3 justify-start items-center">
+            <img [src]="character()?.thumbnail_url"
+                [alt]="character()!.name"
+                class="h-full">
+        </div>
+
+        <div class="col-span-2">
+            <h2 class="text-xl font-bold">{{character()!.name}}</h2>
+        </div>
+
+        <div class="col-start-2 row-start-2 pr-1">
+            <p class="truncate"><strong>{{'race' | translate}}:</strong> {{character()!.race | translate}}</p>
+        </div>
+
+        <div class="col-start-3 row-start-2">
+            <p class="truncate"><strong>{{'class'| translate}}:</strong> {{character()!.class | translate}}</p>
+        </div>
+
+        <div class="col-start-2 row-start-3 pr-1">
+            <p><strong>{{'role'| translate}}:</strong> {{character()!.active_spec_role | translate}}</p>
+        </div>
+        <div class="col-start-3 row-start-3">
+            <p><strong>IO:</strong> {{mythicPlusScores()?.scores?.all}}</p>
+        </div>
+
+    </div>
+</a>
+}

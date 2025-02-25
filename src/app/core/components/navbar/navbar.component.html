@@ -1,0 +1,17 @@
+<div class="max-w-6xl m-auto mt-4">
+
+    <ul class="flex justify-start items-center">
+        @for (item of navItems; track $index) {
+        <li>
+            <a [routerLink]="item.route"
+                routerLinkActive="bg-black border-b-2 border-[rgba(255,223,0,0.9)]"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="py-2 px-4">
+                {{ item.name | translate}}
+            </a>
+        </li>
+        }
+    </ul>
+
+
+</div>
