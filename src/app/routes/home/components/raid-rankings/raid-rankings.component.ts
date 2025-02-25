@@ -1,26 +1,32 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, signal, OnInit } from '@angular/core';
 import { RAIDProgression, RAIDProgressionSummary, RAIDRankings, RAIDRankingsSummary } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@shared/pipes/translate.pipe';
 import { IOImageService } from '@shared/services/IOImage.service';
+import { SpinnerComponent } from '@shared/components/spinner/spinner.component';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'raid-rankings',
   templateUrl: './raid-rankings.component.html',
-  imports: [CommonModule, TranslatePipe],
+  imports: [CommonModule, TranslatePipe, SpinnerComponent],
 })
-export class RaidRankingsComponent {
+export class RaidRankingsComponent implements OnInit {
 
   private IOImageService = inject(IOImageService);
 
   public raidRankings = input.required<RAIDRankings>();
   public raidProgression = input.required<RAIDProgression>();
 
+  public isLoading = signal<boolean>(true);
+
   public raidKeys = computed(() => {
     const rankings = this.raidRankings();
-    return rankings ? Object.keys(rankings) : [];
+    if (!rankings || !environment.currentRaid) return [];
+  
+    return Object.keys(rankings).filter(raidKey => raidKey === environment.currentRaid);
   });
-
+  
   public raidsRanking = computed(() => {
     const rankings = this.raidRankings();
     if (!rankings) return {};
@@ -49,4 +55,11 @@ export class RaidRankingsComponent {
     this.IOImageService.onImageError(event);
   }
 
+  public ngOnInit(): void {
+    if (this.raidRankings() && this.raidProgression()) {
+      setTimeout(() => {
+        this.isLoading.set(false);
+      }, 250);
+    }
+  }
 }

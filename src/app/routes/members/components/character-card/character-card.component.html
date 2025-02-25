@@ -1,4 +1,4 @@
-@if (character() != null || mythicPlusScores() != undefined){
+@if (isLoading() === false) {
 <a [routerLink]="[character()!.region, character()!.realm, character()!.name]"
     class="block max-w-sm">
     <div class="grid grid-cols-3 grid-rows-3 gap-0 border pl-1"
@@ -30,4 +30,8 @@
 
     </div>
 </a>
+}@else {
+    <div class="flex justify-center items-center m-auto p-4">
+        <spinner></spinner>
+    </div>
 }
