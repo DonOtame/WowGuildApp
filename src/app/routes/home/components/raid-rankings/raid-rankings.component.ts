@@ -24,8 +24,17 @@ export class RaidRankingsComponent implements OnInit {
     const rankings = this.raidRankings();
     if (!rankings || !environment.currentRaid) return [];
   
-    return Object.keys(rankings).filter(raidKey => raidKey === environment.currentRaid);
+    const filteredKeys = Object.keys(rankings).filter(raidKey => 
+      raidKey === environment.currentRaid || raidKey === environment.previousRaid
+    );
+  
+    return filteredKeys.sort((a, b) => {
+      if (a === environment.currentRaid) return -1;
+      if (b === environment.currentRaid) return 1;
+      return 0;
+    });
   });
+  
   
   public raidsRanking = computed(() => {
     const rankings = this.raidRankings();

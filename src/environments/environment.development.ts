@@ -4,7 +4,8 @@ export const environment = {
     defaultImage: 'https://wallpapercave.com/wp/wp4578809.jpg',
     guildImage: './logo.jpg',
     favicon: './logo.ico',
-    currentRaid: 'nerubar-palace',
+    currentRaid: 'liberation-of-undermine',
+    previousRaid: 'nerubar-palace',
     params: {
         region: 'us',
         realm: 'quelthalas',
