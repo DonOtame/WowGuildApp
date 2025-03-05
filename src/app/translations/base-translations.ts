@@ -24,5 +24,4 @@ export const baseTranslations: { [key: string]: { [lang: string]: string } } = {
 
     'Last Kills': { es: 'Ultimas Muertes', en: 'Last Kills' },
     'blackrock-depths': { es: 'Profundidades de Roca Negra', en: 'Blackrock Depths' },
-    'liberation-of-undermine': { es: 'Liberación de Minahonda', en: 'Liberation of Undermine' },
 };

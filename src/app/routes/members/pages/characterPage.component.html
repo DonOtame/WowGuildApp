@@ -40,7 +40,7 @@
 
     <div class="flex flex-row justify-center text-center text-xl mt-2 pb-4 ">
         <p class="mr-1">
-            IO: 
+            IO:
         </p>
         <h1 [style.color]="mythicPlusScores()?.segments?.all?.color">
             {{ mythicPlusScores()?.segments?.all?.score }}
@@ -63,7 +63,7 @@
                 'background-image': 'url(' + dungeon.background_image_url + ')',
                 'box-shadow': $index === 0 ? '0 0 0 4px rgba(255,223,0,0.8)' : '' 
               }">
-            <div class="bg-black bg-opacity-50 rounded-lg p-4">
+            <div class="bg-black bg-opacity-50 rounded-lg p-4 h-full">
                 <h3 class="text-xl font-semibold text-yellow-400 text-center">
                     {{ dungeon.short_name | translate }} {{dungeon.mythic_level}}
                 </h3>
@@ -76,6 +76,7 @@
                     {{ dungeon.clear_time_ms | date: 'mm:ss' }}
                 </p>
 
+                @if (dungeon.affixes.length > 0) {
                 <div class="mt-4">
                     <p class="font-semibold text-lg text-white pb-1">{{ 'affixes' | translate }}:</p>
                     <div class="flex flex-wrap gap-4">
@@ -91,6 +92,7 @@
                         }
                     </div>
                 </div>
+                }
             </div>
         </div>
         }

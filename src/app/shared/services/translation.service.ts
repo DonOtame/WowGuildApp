@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { baseTranslations, nerubarPalaceTranslations, classTranslations, raceTranslations, affixesTranslations, dungeonsTranslations } from '@translations';
+import { baseTranslations, nerubarPalaceTranslations, classTranslations, raceTranslations, affixesTranslations, dungeonsTranslations, liberationOfUndermineTranslations } from '@translations';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,12 @@ export class TranslationService {
 
   private translations = {
     ...baseTranslations,
-    ...nerubarPalaceTranslations,
     ...classTranslations,
     ...raceTranslations,
     ...affixesTranslations,
     ...dungeonsTranslations,
+    ...nerubarPalaceTranslations,
+    ...liberationOfUndermineTranslations,
   };
 
   constructor() {

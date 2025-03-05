@@ -6,7 +6,7 @@ import { environment } from '@env/environment';
 })
 export class IOImageService {
 
-  private selectedRaid = environment.previousRaid;
+  private currentRaid = environment.currentRaid;
 
   public getRaidImage(raidKey?: string): string {
     return raidKey
@@ -20,7 +20,7 @@ export class IOImageService {
 
   public getEncounterImage(encounterSlug?: string): string {
     return encounterSlug
-      ? `https://cdn.raiderio.net/cdn-cgi/image/quality=75,width=205/images/${this.selectedRaid}/portraits/${encounterSlug}.png`
+      ? `https://cdn.raiderio.net/cdn-cgi/image/quality=75,width=205/images/${this.currentRaid}/portraits/${encounterSlug}.png`
       : environment.defaultImage;
   }
 }

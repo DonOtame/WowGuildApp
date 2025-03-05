@@ -33,7 +33,7 @@ export class GuildService {
     const url = `${this.baseUrl}guilds/profile`;
     const params = {
       ...environment.params,
-      fields: 'raid_progression,raid_rankings,raid_encounters'
+      fields: `raid_progression,raid_rankings,raid_encounters:${environment.currentRaid}:${environment.difficulty}`
     };
 
     return this.http.get<GuildResponse>(url, { params }).pipe(

@@ -1,7 +1,5 @@
 @for (raid of raidKeys(); track $index) {
 
-@if (isLoading() === false) {
-
 <div class="bg-cover bg-center m-4"
     [style.backgroundImage]="'url(' + getRaidImage(raid) + ')'"
     (error)="onImageError($event)">
@@ -30,9 +28,4 @@
 
 
 </div>
-}@else {
-    <div class="flex justify-center items-center m-auto p-4">
-        <spinner></spinner>
-    </div>
-}
 }
