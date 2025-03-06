@@ -26,7 +26,7 @@ export default class MembersComponent {
   });
 
   public raiders = computed(() => {
-    return this.members().filter(member => member.rank === 2);
+    return this.members().filter(member => member.rank === 2 || member.rank === 3);
   });
 
 
