@@ -5,7 +5,7 @@ export const environment = {
     guildImage: './logo.jpg',
     favicon: './logo.ico',
     currentRaid: 'liberation-of-undermine',
-    difficulty: 'normal',
+    difficulty: 'heroic',
     previousRaid: 'nerubar-palace',
     params: {
         region: 'us',
