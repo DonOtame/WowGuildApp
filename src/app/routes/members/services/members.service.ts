@@ -33,7 +33,7 @@ export class MembersService {
     return this.http.get<any>(url, { params }).pipe(
       map(response => {
         const members: Member[] = response.members
-          .filter((m: any) => [0, 1, 2].includes(m.rank))
+          .filter((m: any) => [0, 1, 2, 3].includes(m.rank))
           .map((m: any) => ({
             rank: m.rank,
             character: {
