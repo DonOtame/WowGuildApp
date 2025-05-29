@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:5000/api/',
+  baseUrl: 'https://wowguildapi.onrender.com/api/',
   defaultImage: 'https://wallpapercave.com/wp/wp4578809.jpg',
   guildImage: './logo.jpg',
   favicon: './logo.ico',
