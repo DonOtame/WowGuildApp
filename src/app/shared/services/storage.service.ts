@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-
-  setItem<T>(key: string, value: T, ttl: number = 3600000): void {
+  setItem<T>(key: string, value: T, ttl: number = 86400000): void {
     const expireAt = Date.now() + ttl;
     const data = { value, expireAt };
     localStorage.setItem(key, JSON.stringify(data));
@@ -30,5 +29,4 @@ export class StorageService {
   clear(): void {
     localStorage.clear();
   }
-
 }
