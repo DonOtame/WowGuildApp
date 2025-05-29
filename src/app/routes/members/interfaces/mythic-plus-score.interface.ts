@@ -1,32 +1,17 @@
-export interface MythicPlusScoresBySeason {
-    season: string;
-    scores: Scores;
-    segments: Segments;
-}
-
-export interface Scores {
-    all: number;
-    dps: number;
-    healer: number;
-    tank: number;
-    spec_0: number;
-    spec_1: number;
-    spec_2: number;
-    spec_3: number;
+export interface MythicPlusScores {
+  season: string;
+  isCurrentSeason: boolean;
+  segments: Segments;
 }
 
 export interface Segments {
-    all: ScoreSegment;
-    dps: ScoreSegment;
-    healer: ScoreSegment;
-    tank: ScoreSegment;
-    spec_0: ScoreSegment;
-    spec_1: ScoreSegment;
-    spec_2: ScoreSegment;
-    spec_3: ScoreSegment;
+  all: ScoreDetails;
+  dps: ScoreDetails;
+  healer: ScoreDetails;
+  tank: ScoreDetails;
 }
 
-export interface ScoreSegment {
-    score: number;
-    color: string;
+export interface ScoreDetails {
+  score: number;
+  color: string;
 }

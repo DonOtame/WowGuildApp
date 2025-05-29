@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
-import { baseTranslations, nerubarPalaceTranslations, classTranslations, raceTranslations, affixesTranslations, dungeonsTranslations, liberationOfUndermineTranslations } from '@translations';
+import {
+  baseTranslations,
+  nerubarPalaceTranslations,
+  classTranslations,
+  raceTranslations,
+  affixesTranslations,
+  dungeonsTranslations,
+  liberationOfUndermineTranslations,
+} from '@translations';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TranslationService {
-
   private currentLang: string;
 
   private translations = {
@@ -31,7 +38,6 @@ export class TranslationService {
   }
 
   setLanguage(lang: string): void {
-    console.log('Setting language to:', lang);
     this.currentLang = lang;
   }
 

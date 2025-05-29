@@ -1,6 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { RAIDRankings, RAIDProgression, RAIDEncounter } from '../interfaces';
+
 import { GuildService } from './guild.service';
+import {
+  RaidEncounter,
+  RaidProgressionResponse,
+  RaidRankingsResponse,
+} from '../interfaces';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,15 +14,23 @@ import { GuildService } from './guild.service';
 export class HomeStateService {
   private guildService = inject(GuildService);
 
-  public raidRankings = signal<RAIDRankings | null>(null);
-  public raidProgression = signal<RAIDProgression | null>(null);
-  public raidEncounters = signal<RAIDEncounter[]>([]);
+  public raidProgressionResponse = signal<RaidProgressionResponse | null>(null);
+  public raidEncounters = signal<RaidEncounter[]>([]);
+  public raidRankingsResponse = signal<RaidRankingsResponse | null>(null);
 
   constructor() {
-    this.guildService.getGuildResponse().subscribe((guild) => {
-      this.raidEncounters.set(guild.raid_encounters);
-      this.raidProgression.set(guild.raid_progression);
-      this.raidRankings.set(guild.raid_rankings);
+    this.guildService.getGuildProgression().subscribe((progression) => {
+      this.raidProgressionResponse.set(progression);
+
+      const raid = progression[environment.currentRaid];
+
+      this.raidEncounters.set(
+        raid && raid.raidEncounters ? Object.values(raid.raidEncounters) : []
+      );
+    });
+
+    this.guildService.getGuildRanking().subscribe((rankings) => {
+      this.raidRankingsResponse.set(rankings);
     });
   }
 }

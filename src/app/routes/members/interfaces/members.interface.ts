@@ -1,12 +1,10 @@
-import { BaseGuild } from '@core/interfaces';
-import { CharacterSummary } from '.';
-
-
-export interface Members extends BaseGuild {
-    members: Member[];
+export interface MembersResponse {
+  rank: number;
+  character: Character;
 }
 
-export interface Member {
-    rank: number;
-    character: CharacterSummary;
+export interface Character {
+  name: string;
+  region: string;
+  realm: string;
 }

@@ -1,5 +1,8 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { RAIDProgression, RAIDProgressionSummary, RAIDRankings, RAIDRankingsSummary } from '../../interfaces';
+import {
+  RaidProgressionResponse,
+  RaidRankingsResponse,
+} from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@shared/pipes/translate.pipe';
 import { IOImageService } from '@shared/services/IOImage.service';
@@ -10,19 +13,20 @@ import { environment } from '@env/environment';
   templateUrl: './raid-rankings.component.html',
   imports: [CommonModule, TranslatePipe],
 })
-export class RaidRankingsComponent {
-
+export class RaidRankingsResponseComponent {
   private IOImageService = inject(IOImageService);
 
-  public raidRankings = input.required<RAIDRankings>();
-  public raidProgression = input.required<RAIDProgression>();
+  public RaidRankingsResponse = input.required<RaidRankingsResponse>();
+  public RaidProgressionResponse = input.required<RaidProgressionResponse>();
 
   public raidKeys = computed(() => {
-    const rankings = this.raidRankings();
+    const rankings = this.RaidRankingsResponse();
     if (!rankings || !environment.currentRaid) return [];
 
-    const filteredKeys = Object.keys(rankings).filter(raidKey =>
-      raidKey === environment.currentRaid || raidKey === environment.previousRaid
+    const filteredKeys = Object.keys(rankings).filter(
+      (raidKey) =>
+        raidKey === environment.currentRaid ||
+        raidKey === environment.previousRaid
     );
 
     return filteredKeys.sort((a, b) => {
@@ -32,33 +36,27 @@ export class RaidRankingsComponent {
     });
   });
 
-
   public raidsRanking = computed(() => {
-    const rankings = this.raidRankings();
+    const rankings = this.RaidRankingsResponse();
     if (!rankings) return {};
 
     return this.raidKeys().reduce((acc, raidKey) => {
       acc[raidKey] = rankings[raidKey];
       return acc;
-    }, {} as Record<string, RAIDRankingsSummary>);
+    }, {} as Record<string, RaidRankingsResponse[string]>);
   });
 
   public raidsProgression = computed(() => {
-    const progression = this.raidProgression();
+    const progression = this.RaidProgressionResponse();
     if (!progression) return {};
 
     return this.raidKeys().reduce((acc, raidKey) => {
       acc[raidKey] = progression[raidKey];
       return acc;
-    }, {} as Record<string, RAIDProgressionSummary>);
+    }, {} as Record<string, RaidProgressionResponse[string]>);
   });
-
-  public getRaidImage(raidKey: string): string {
-    return this.IOImageService.getRaidImage(raidKey);
-  }
 
   public onImageError(event: Event): void {
     this.IOImageService.onImageError(event);
   }
-
 }

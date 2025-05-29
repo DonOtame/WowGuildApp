@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://raider.io/api/v1/',
+  baseUrl: 'https://wowguildapi.onrender.com/api/',
   defaultImage: 'https://wallpapercave.com/wp/wp4578809.jpg',
   guildImage: './logo.jpg',
   favicon: './logo.ico',

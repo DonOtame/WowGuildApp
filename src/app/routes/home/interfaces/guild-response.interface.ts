@@ -1,42 +1,61 @@
-import { BaseGuild } from "@core/interfaces";
-
-export interface GuildResponse extends BaseGuild {
-    raid_rankings: RAIDRankings;
-    raid_progression: RAIDProgression;
-    raid_encounters: RAIDEncounter[];
+export interface RaidProgressionResponse {
+  [raidSlug: string]: RaidData;
 }
 
-export interface RAIDEncounter {
-    slug: string;
-    name: string;
-    defeatedAt: Date;
+export interface RaidData {
+  summary: string;
+  backgroundImageUrl: string;
+  totalBosses: number;
+  bossesKilled: RaidBossesKilled;
+  raidEncounters: {
+    [encounterSlug: string]: RaidEncounter;
+  };
 }
 
-export interface RAIDProgression {
-    [raidName: string]: RAIDProgressionSummary;
+export interface RaidBossesKilled {
+  normal: number;
+  heroic: number;
+  mythic: number;
 }
 
-export interface RAIDProgressionSummary {
-    summary: string;
-    total_bosses: number;
-    normal_bosses_killed: number;
-    heroic_bosses_killed: number;
-    mythic_bosses_killed: number;
+export interface RaidEncounter {
+  slug: string;
+  name: string;
+  bossImageUrl: string;
+  defeats: RaidDefeats;
 }
 
-export interface RAIDRankings {
-    [raidName: string]: RAIDRankingsSummary;
+export interface RaidDefeats {
+  normal?: string;
+  heroic?: string;
+  mythic?: string;
 }
 
-
-export interface RAIDRankingsSummary {
-    normal: Summary;
-    heroic: Summary;
-    mythic: Summary;
+export interface RaidRankingsResponse {
+  [raidSlug: string]: DifficultyRankings;
 }
 
-export interface Summary {
-    world: number;
-    region: number;
-    realm: number;
+export interface DifficultyRankings {
+  normal: RaidRanking;
+  heroic: RaidRanking;
+  mythic: RaidRanking;
+}
+
+export interface RaidRanking {
+  world: number;
+  region: number;
+  realm: number;
+}
+
+export type GuildCharactersList = GuildCharacter[];
+
+export interface Character {
+  name: string;
+  region: string;
+  realm: string;
+}
+
+export interface GuildCharacter {
+  rank: number;
+  character: Character;
 }

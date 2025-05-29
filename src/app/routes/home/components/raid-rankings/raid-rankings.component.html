@@ -1,31 +1,31 @@
 @for (raid of raidKeys(); track $index) {
 
-<div class="bg-cover bg-center m-4"
-    [style.backgroundImage]="'url(' + getRaidImage(raid) + ')'"
-    (error)="onImageError($event)">
-    <h1 class="text-center text-white text-2xl font-bold p-4">
-        {{ raid | translate }}
-    </h1>
+<div
+  class="bg-cover bg-center m-4"
+  [style.backgroundImage]="
+    'url(' + raidsProgression()[raid].backgroundImageUrl + ')'
+  "
+  (error)="onImageError($event)"
+>
+  <h1 class="text-center text-white text-2xl font-bold p-4">
+    {{ raid | translate }}
+  </h1>
 
-    <p class="text-center p-4 text-xl"> {{raidsProgression()[raid].summary}}</p>
+  <p class="text-center p-4 text-xl">{{ raidsProgression()[raid].summary }}</p>
 
-    <div class="flex flex-row text-white text-center justify-around p-4">
-
-        <p>
-            <strong> Region: </strong>
-            {{raidsRanking()[raid].mythic.region}}
-        </p>
-        <p>
-            <strong> Realm: </strong>
-            {{raidsRanking()[raid].mythic.realm}}
-        </p>
-        <p>
-            <strong> World: </strong>
-            {{raidsRanking()[raid].mythic.world}}
-        </p>
-
-    </div>
-
-
+  <div class="flex flex-row text-white text-center justify-around p-4">
+    <p>
+      <strong> Region: </strong>
+      {{ raidsRanking()[raid].mythic.region }}
+    </p>
+    <p>
+      <strong> Realm: </strong>
+      {{ raidsRanking()[raid].mythic.realm }}
+    </p>
+    <p>
+      <strong> World: </strong>
+      {{ raidsRanking()[raid].mythic.world }}
+    </p>
+  </div>
 </div>
 }

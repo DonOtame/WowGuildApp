@@ -6,19 +6,15 @@ import { StorageService } from '@shared/services/storage.service';
 import { map, Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GuildSummaryService {
-
-
   private baseUrl = environment.baseUrl;
 
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
 
-
   getSummaryGuildResponse(): Observable<BaseGuild> {
-
     const storageKey = `guild:${environment.params.name}`;
 
     const cachedData = this.storageService.getItem<BaseGuild>(storageKey);
@@ -27,15 +23,14 @@ export class GuildSummaryService {
       return of(cachedData);
     }
 
-    const url = `${this.baseUrl}guilds/profile`;
+    const url = `${this.baseUrl}guild/profile`;
     const params = environment.params;
 
     return this.http.get<BaseGuild>(url, { params }).pipe(
-      map(response => {
+      map((response) => {
         this.storageService.setItem(storageKey, response);
-        return response
+        return response;
       })
     );
   }
-
 }
